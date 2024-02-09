@@ -1,94 +1,69 @@
 import { useState } from "react";
 import "./App.css";
 
-const CARDS = [
-  {
-    id: 8721,
-    name: "Alexey",
-    like: false,
-  },
-  {
-    id: 5261,
-    name: "Vitaly",
-    like: false,
-  },
-  {
-    id: 8764,
-    name: "Kirill",
-    like: false,
-  },
-  {
-    id: 2352,
-    name: "Max",
-    like: false,
-  },
-];
+function Greeting() {
+  return <h1>Приветствую!</h1>;
+}
 
-function Card({ name, isLike, onClick }) {
-  return (
-    <div>
-      {/* <span>{name}</span> */}
-      {/* <input type="text" /> */}
-      <p>{name}</p>
-      <button onClick={onClick}>{isLike ? "Unlike" : "Like"}</button>
-    </div>
-  );
+function Bye() {
+  return <h1>Пока!</h1>;
 }
 
 function App() {
-  const [cards, setCards] = useState(CARDS);
+  const [isShow, setShow] = useState(undefined);
 
-  const handleLikeClick = (id) => {
-    const cardCopy = cards.map((item) => {
-      const copyItem = { ...item };
-      if (item.id === id) {
-        copyItem.like = !copyItem.like;
-      }
+  // let component;
 
-      return copyItem;
-    });
-    setCards(cardCopy);
-  };
+  // if (isShow) {
+  //   component = <Greeting />;
+  // } else {
+  //   component = <Bye />;
+  // }
+
+  // if (isShow) {
+  //   return <Greeting />;
+  // }
+
+  switch (isShow) {
+    case true:
+      return (
+        <>
+          <Greeting />
+          <button onClick={() => setShow((s) => !s)}>Click</button>
+        </>
+      );
+    case false:
+      return (
+        <>
+          <Bye />
+          <button onClick={() => setShow((s) => !s)}>Click</button>
+        </>
+      );
+    default:
+      return (
+        <div className="App">
+          <header className="App-header">
+            {/* {isShow ? <Greeting /> : <Bye />} */}
+            {/* {isShow ? <Greeting /> : null}  */}
+            {/* {isShow && <Greeting />} */}
+            {/* {component} */}
+            <button onClick={() => setShow((s) => !s)}>Click</button>
+          </header>
+        </div>
+      );
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-grid">
-          {cards.map((item) => (
-            <Card
-              key={item.id}
-              name={item.name}
-              isLike={item.like}
-              onClick={() => handleLikeClick(item.id)}
-            />
-          ))}
-        </div>
+        {/* {isShow ? <Greeting /> : <Bye />} */}
+        {/* {isShow ? <Greeting /> : null}  */}
+        {/* {isShow && <Greeting />} */}
+        {/* {component} */}
+        <button onClick={() => setShow((s) => !s)}>Click</button>
       </header>
     </div>
   );
 }
 
 export default App;
-
-// function App() {
-//   const [items, setItems] = useState([1, 1, 2, 3, 4, 5]);
-//   console.log(items);
-
-//   const handleClick = () => {
-//     setItems([...items, items.length]);
-//   };
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         {items.map((item, index) => {
-//           return <div key={index}>{item}</div>;
-//         })}
-//         <button onClick={handleClick}>Add</button>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
