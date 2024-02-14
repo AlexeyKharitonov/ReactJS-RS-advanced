@@ -1,22 +1,16 @@
-import logo from "./logo.svg";
+import { useState } from "react";
 import "./App.css";
+import { useThrottle } from "./customHooks/useThrottle/useThrottle";
 
 function App() {
+  const [value, setValue] = useState("");
+  const throttledValue = useThrottle(value, 1000);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <p>{throttledValue}</p>
       </header>
     </div>
   );
